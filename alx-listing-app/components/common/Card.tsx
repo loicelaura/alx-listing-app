@@ -1,21 +1,23 @@
 import React from 'react';
-import { CardProps } from '@/interfaces';
+import Image from 'next/image';
 
-const Card: React.FC<CardProps> = ({ title, description, imageUrl, onClick }) => {
+interface CardProps {
+  image: string;
+  name: string;
+  price: string;
+  rating: number;
+}
+
+const Card: React.FC<CardProps> = ({ image, name, price, rating }) => {
   return (
-    <div className="rounded-xl shadow-md overflow-hidden border border-gray-200 hover:shadow-lg transition">
-      <img src={imageUrl} alt={title} className="w-full h-48 object-cover" />
+    <div className="border rounded-xl overflow-hidden shadow-md bg-white">
+      <div className="relative h-48 w-full">
+        <Image src={image} alt={name} layout="fill" objectFit="cover" />
+      </div>
       <div className="p-4">
-        <h3 className="text-lg font-semibold">{title}</h3>
-        <p className="text-sm text-gray-600 mt-2">{description}</p>
-        {onClick && (
-          <button 
-            onClick={onClick}
-            className="mt-4 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition"
-          >
-            Learn More
-          </button>
-        )}
+        <h2 className="text-lg font-semibold">{name}</h2>
+        <p className="text-sm text-gray-600">{price}</p>
+        <p className="text-sm text-yellow-500">⭐ {rating}</p>
       </div>
     </div>
   );
